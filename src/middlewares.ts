@@ -1,4 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
+
 import CustomError from './classes/CustomError';
 import {ErrorResponse} from './types/MessageTypes';
 import {validationResult} from 'express-validator';
@@ -10,6 +11,7 @@ const notFound = (req: Request, _res: Response, next: NextFunction) => {
   const error = new CustomError(`🔍 - Not Found - ${req.originalUrl}`, 404);
   next(error);
 };
+
 const errorHandler = (
   err: CustomError,
   _req: Request,
@@ -24,6 +26,7 @@ const errorHandler = (
     stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
   });
 };
+
 const validationErrors = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -37,6 +40,7 @@ const validationErrors = (req: Request, res: Response, next: NextFunction) => {
   }
   next();
 };
+
 const imageFromWikipedia = async (
   req: Request<{}, {}, Omit<Species, 'species_id'>>,
   res: Response,
