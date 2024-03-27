@@ -5,6 +5,7 @@ import speciesRoute from './routes/speciesRoute';
 import animalRoute from './routes/animalRoute';
 */
 const router = express.Router();
+
 router.get('/', (req: Request, res: Response) => {
   res.json({
     message: 'animals api v1',

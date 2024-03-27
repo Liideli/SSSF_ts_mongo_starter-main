@@ -25,7 +25,7 @@ router
   .get(param('id').isInt(), validationErrors, categoryGet)
   .put(
     param('id').isInt(),
-    body('category_name').notEmpty().isString().isAlpha().escape(),
+    body('category_name').isString().escape(),
     validationErrors,
     categoryPut
   )
