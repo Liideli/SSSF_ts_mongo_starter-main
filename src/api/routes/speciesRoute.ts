@@ -2,14 +2,15 @@ import express from 'express';
 import {
   speciesDelete,
   speciesGet,
-  speciesGetByBounds,
   speciesListGet,
   speciesPost,
   speciesPut,
 } from '../controllers/speciesController';
 import {imageFromWikipedia} from '../../middlewares';
 import {body, param} from 'express-validator';
+
 const router = express.Router();
+
 router
   .route('/')
   .get(speciesListGet)
@@ -20,8 +21,6 @@ router
     body('image').isURL(),
     speciesPost
   );
-
-router.route('/area').get(speciesGetByBounds);
 
 router
   .route('/:id')
@@ -35,4 +34,5 @@ router
     speciesPut
   )
   .delete(param('id').isMongoId().notEmpty(), speciesDelete);
+
 export default router;
