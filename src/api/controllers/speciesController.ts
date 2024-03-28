@@ -10,23 +10,19 @@ const speciesListGet = async (
   next: NextFunction
 ) => {
   try {
-    // const species = await getAllSpecies();
-    // res.json(species);
     const species = await speciesModel.find();
     res.json(species);
   } catch (error) {
     next(error);
   }
 };
+
 const speciesGet = async (
   req: Request<{id: string}, {}, {}>,
   res: Response<Species>,
   next: NextFunction
 ) => {
   try {
-    // const id = Number(req.params.id);
-    // const category = await getSpeciesById(id);
-    // res.json(category);
     const species = await speciesModel.findById(req.params.id);
     if (!species) {
       throw new CustomError('No species found', 404);
@@ -43,8 +39,6 @@ const speciesPost = async (
   next: NextFunction
 ) => {
   try {
-    // const result = await postSpecies(req.body);
-    // res.json(result);
     const species = await speciesModel.create(req.body);
     const response = {
       message: 'Species added',
@@ -62,8 +56,6 @@ const speciesPut = async (
   next: NextFunction
 ) => {
   try {
-    // const result = await putSpecies(Number(req.params.id), req.body);
-    // res.json(result);
     const species = await speciesModel.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -88,8 +80,6 @@ const speciesDelete = async (
   next: NextFunction
 ) => {
   try {
-    // const result = await deleteSpecies(Number(req.params.id));
-    // res.json(result);
     const species = await speciesModel.findByIdAndDelete(req.params.id);
     if (!species) {
       throw new CustomError('No species found', 404);

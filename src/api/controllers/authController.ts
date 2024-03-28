@@ -1,5 +1,8 @@
 import {Request, Response, NextFunction} from 'express';
-import {UserWithoutPasswordRole} from '../../types/DBTypes';
+import {
+  UserWithoutPassword,
+  UserWithoutPasswordRole,
+} from '../../types/DBTypes';
 import {MessageResponse} from '../../types/MessageTypes';
 import userModel from '../models/userModel';
 import CustomError from '../../classes/CustomError';
@@ -29,13 +32,13 @@ const login = async (
     }
 
     const userWithoutPassword: UserWithoutPasswordRole = {
-      _id: user.id,
+      _id: user._id,
       email: user.email,
       user_name: user.user_name,
     };
 
-    const tokenContent = {
-      id: user._id,
+    const tokenContent: UserWithoutPassword = {
+      _id: user._id,
       email: user.email,
       user_name: user.user_name,
       role: user.role,
