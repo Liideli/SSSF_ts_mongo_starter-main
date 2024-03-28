@@ -25,7 +25,7 @@ router
   .get(param('id').isMongoId(), validationErrors, categoryGet)
   .put(
     param('id').isMongoId().isInt(),
-    body('category_name').isString().escape(),
+    body('category_name').isString().escape().optional(),
     validationErrors,
     categoryPut
   )

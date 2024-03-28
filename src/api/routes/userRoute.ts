@@ -15,7 +15,7 @@ router
   .route('/')
   .get(userListGet)
   .post(
-    body('user_name').notEmpty().isString().isAlpha().escape(),
+    body('user_name').isString().escape(),
     body('email').isEmail().normalizeEmail(),
     body('password').escape(),
     validationErrors,
@@ -26,13 +26,13 @@ router
   .route('/:id')
   .get(param('id').isMongoId(), validationErrors, userGet)
   .put(
-    param('id').isMongoId().isInt(),
-    body('user_name').notEmpty().isString().isAlpha().escape(),
-    body('email').isEmail().normalizeEmail(),
-    body('password').escape(),
+    param('id').isMongoId(),
+    body('user_name').isString().escape().optional(),
+    body('email').isEmail().normalizeEmail().optional(),
+    body('password').escape().optional(),
     validationErrors,
     userPut
   )
-  .delete(param('id').isMongoId().isInt(), validationErrors, userDelete);
+  .delete(param('id').isMongoId(), validationErrors, userDelete);
 
 export default router;
